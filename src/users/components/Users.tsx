@@ -1,23 +1,20 @@
-import { max } from 'lodash';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Stack, TextField } from '@mui/material'
+import { Schema, schema } from '../types/schema'
 export function Users() {
-  const { register,
-    handleSubmit,
-    formState: { errors } } = useForm<{ email: string }>({
-      mode: 'all',  // defines when the validation is done
-    }
-    );
-  function onSubmit() {
-    console.log('submitted')
+  const { register } = useForm<Schema>({
+    mode: 'all',
+    resolver: zodResolver(schema),
   }
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register('email', {
-        required: { value: true, message: 'Email is required' },
-        maxLength: { value: 50, message: 'Max length is 50' }
-      }
-      )} placeholder='Email' />
-      {errors.email && <p>{errors.email.message}</p>}
-    </form>
-  )
+  );
+  return <>
+    <Stack sx={{ gap: 2 }}>
+
+      <TextField {...register('name')} label="Name" />
+      <TextField {...register('email')} label="Email" />
+      <TextField {...register('age')} label="Age" />
+    </Stack>
+
+  </>
 }
