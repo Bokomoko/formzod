@@ -1,8 +1,8 @@
-import { Users } from './users/components/Users'
+import { UsersProvider } from './users/components/UsersProvider'
 export function App() {
   return (
     <div>
-      <Users />
+      <UsersProvider />
     </div>
   )
 }
